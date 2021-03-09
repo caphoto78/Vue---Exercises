@@ -12,6 +12,8 @@
       @before-leave="beforeLeave"
       @leave="leave"
       @after-leave="afterLeave"
+      @enter-cancelled="enterCancelled"
+      @leave-cancelled="leaveCancelled"
     >
       <p v-if="paraIsVisible">
         This is only sometimes visible...
@@ -41,17 +43,35 @@ export default {
       animatedBlock: false,
       dialogIsVisible: false,
       paraIsVisible: false,
-      usersAreVisible: false
+      usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null
     };
   },
   methods: {
+    enterCancelled(el) {
+      clearInterval(this.enterInterval);
+    },
+    leaveCancelled(el) {
+      clearInterval(th);
+    },
     beforeEnter(el) {
       console.log('beforeEnter');
       console.log(el);
+      el.style.opacity = 0;
     },
-    enter(el) {
+    enter(el, done) {
       console.log('Enter');
       console.log(el);
+      let round = 1;
+      this.enterInterval = setInterval(() => {
+        el.style.opacity = round * 0.01;
+        round++;
+        if (round > 100) {
+          clearInterval(this.enterInterval);
+          done();
+        }
+      }, 10);
     },
     afterEnter(el) {
       console.log('afterEnter');
@@ -60,10 +80,20 @@ export default {
     beforeLeave(el) {
       console.log('beforeLeave');
       console.log(el);
+      el.style.opacity = 1;
     },
-    leave(el) {
+    leave(el, done) {
       console.log('Leave');
       console.log(el);
+      let round = 1;
+      this.leaveInterval = setInterval(() => {
+        el.style.opacity = 1 - round * 0.01;
+        round++;
+        if (round > 100) {
+          clearInterval(this.leaveInterval);
+          done();
+        }
+      }, 10);
     },
     afterLeave(el) {
       console.log('afterLeave');

@@ -120,7 +120,7 @@
 import RatingControl from './RatingControl.vue';
 export default {
   components: {
-    RatingControl
+    RatingControl,
   },
   data() {
     return {
@@ -131,7 +131,7 @@ export default {
       how: null,
       confirm: false,
       rating: null,
-      userNameValidity: 'pending'
+      userNameValidity: 'pending',
     };
   },
   methods: {
@@ -164,8 +164,8 @@ export default {
       } else {
         this.userNameValidity = 'valid';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
