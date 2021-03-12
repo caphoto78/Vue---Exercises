@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state() {
     return {
+      lastFetch: null,
       coaches: [
         {
           id: 'c1',
@@ -23,6 +24,15 @@ export default {
           areas: ['frontend', 'career'],
           description:
             'I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.',
+          hourlyRate: 30
+        },
+        {
+          id: 'c3',
+          firstName: 'John',
+          lastName: 'Doe',
+          areas: ['career'],
+          description:
+            'I am John and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.',
           hourlyRate: 30
         }
       ]

@@ -51,6 +51,9 @@ button:active {
   background-color: #270041;
   border-color: #270041;
 }
+button:focus {
+  outline: 0;
+}
 
 .flat {
   background-color: transparent;
