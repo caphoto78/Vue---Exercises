@@ -1,10 +1,6 @@
 <template>
   <div>
-    <base-dialog
-      :show="!!error"
-      title="An error occurred!"
-      @close="handleError"
-    >
+    <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
       <p>{{ error }}</p>
     </base-dialog>
     <section>
@@ -13,18 +9,9 @@
     <section>
       <base-card>
         <div class="controls">
-          <base-button mode="outline" @click="loadCoaches(true)"
-            >Refresh</base-button
-          >
-          <base-button link to="/auth?redirect=register" v-if="!isLoggedIn"
-            >Login to register as Coach</base-button
-          >
-          <base-button
-            v-if="isLoggedIn && !isCoach && !isLoading"
-            link
-            to="/register"
-            >Register as Coach</base-button
-          >
+          <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
+          <base-button link to="/auth?redirect=register" v-if="!isLoggedIn">Login to Register as Coach</base-button>
+          <base-button v-if="isLoggedIn && !isCoach && !isLoading" link to="/register">Register as Coach</base-button>
         </div>
         <div v-if="isLoading">
           <base-spinner></base-spinner>
@@ -40,7 +27,7 @@
             :areas="coach.areas"
           ></coach-item>
         </ul>
-        <h3 v-else>No coaches Found.</h3>
+        <h3 v-else>No coaches found.</h3>
       </base-card>
     </section>
   </div>
@@ -49,10 +36,12 @@
 <script>
 import CoachItem from '../../components/coaches/CoachItem.vue';
 import CoachFilter from '../../components/coaches/CoachFilter.vue';
-import BaseButton from '../../components/ui/BaseButton.vue';
 
 export default {
-  components: { CoachItem, CoachFilter, BaseButton },
+  components: {
+    CoachItem,
+    CoachFilter,
+  },
   data() {
     return {
       isLoading: false,
@@ -60,8 +49,8 @@ export default {
       activeFilters: {
         frontend: true,
         backend: true,
-        career: true
-      }
+        career: true,
+      },
     };
   },
   computed: {
@@ -73,7 +62,7 @@ export default {
     },
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches'];
-      return coaches.filter(coach => {
+      return coaches.filter((coach) => {
         if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
           return true;
         }
@@ -88,7 +77,7 @@ export default {
     },
     hasCoaches() {
       return !this.isLoading && this.$store.getters['coaches/hasCoaches'];
-    }
+    },
   },
   created() {
     this.loadCoaches();
@@ -101,7 +90,7 @@ export default {
       this.isLoading = true;
       try {
         await this.$store.dispatch('coaches/loadCoaches', {
-          forceRefresh: refresh
+          forceRefresh: refresh,
         });
       } catch (error) {
         this.error = error.message || 'Something went wrong!';
@@ -110,8 +99,8 @@ export default {
     },
     handleError() {
       this.error = null;
-    }
-  }
+    },
+  },
 };
 </script>
 

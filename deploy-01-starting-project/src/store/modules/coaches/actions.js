@@ -11,15 +11,19 @@ export default {
 
     const token = context.rootGetters.token;
 
-    const response = await fetch(`https://vue-http-demo-79c45-default-rtdb.europe-west1.firebasedatabase.app/coaches/${userId}.json?auth=` + token, {
-      method: 'PUT',
-      body: JSON.stringify(coachData)
-    });
+    const response = await fetch(
+      `https://vue-http-demo-85e9e.firebaseio.com/coaches/${userId}.json?auth=` +
+        token,
+      {
+        method: 'PUT',
+        body: JSON.stringify(coachData)
+      }
+    );
 
     // const responseData = await response.json();
 
     if (!response.ok) {
-      //error ...
+      // error ...
     }
 
     context.commit('registerCoach', {
@@ -33,14 +37,17 @@ export default {
     }
 
     const response = await fetch(
-      `https://vue-http-demo-79c45-default-rtdb.europe-west1.firebasedatabase.app/coaches.json`);
+      `https://vue-http-demo-85e9e.firebaseio.com/coaches.json`
+    );
     const responseData = await response.json();
 
     if (!response.ok) {
-      const error = new Error(response.message || 'Failed to fetch');
+      const error = new Error(responseData.message || 'Failed to fetch!');
       throw error;
     }
+
     const coaches = [];
+
     for (const key in responseData) {
       const coach = {
         id: key,
@@ -52,7 +59,8 @@ export default {
       };
       coaches.push(coach);
     }
+
     context.commit('setCoaches', coaches);
     context.commit('setFetchTimestamp');
   }
-}
+};
