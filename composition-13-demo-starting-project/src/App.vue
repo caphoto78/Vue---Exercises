@@ -14,19 +14,19 @@ import ProjectsList from './components/projects/ProjectsList.vue';
 export default {
   components: {
     UserList,
-    ProjectsList,
+    ProjectsList
   },
   data() {
     return {
       selectedUser: null,
-      activeUsers: USER_DATA,
+      activeUsers: USER_DATA
     };
   },
   methods: {
     selectUser(uid) {
-      this.selectedUser = this.activeUsers.find((usr) => usr.id === uid);
-    },
-  },
+      this.selectedUser = this.activeUsers.find(usr => usr.id === uid);
+    }
+  }
 };
 </script>
 
