@@ -19,11 +19,11 @@ export default {
   },
   setup() {
     const selectedUser = ref(null);
-    const activeUsers = ref(USER_DATA);
+    const activeUsers = USER_DATA;
 
-    const selectUser = function(uid) {
-      selectedUser.value = activeUsers.value.find(usr => usr.id === uid);
-    };
+    function selectUser(uid) {
+      selectedUser.value = activeUsers.find(usr => usr.id === uid);
+    }
 
     return { selectedUser, activeUsers, selectUser };
   }
