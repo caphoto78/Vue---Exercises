@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue/dist/vue.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1 ref="heading">{{ title }}</h1>
+    <button v-on:click="show" :disabled="showParagraph">Show Paragraph</button>
+    <p v-if="showParagraph">This is not always visible</p>
+  </div>
+</body>
+
+</html>
